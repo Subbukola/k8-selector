@@ -23,3 +23,18 @@ spec:
       effect: "NoExecute"  # it matches node which tainted with "NoExecute" and executes pod inside that node
   # nodeSelector:
   #   topology.kubernetes.io/zone: us-east-1d
+
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+spec:
+  containers:
+    - name: mongodb 
+      image: subbukola541/mongodb:1.0
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "roboshop"
+      effect: "NoExecute"  # it matches node which tainted with "NoExecute" and executes pod inside that node
