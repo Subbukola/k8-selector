@@ -18,9 +18,19 @@
 #PreferNoSchedule
 #================
 # if you use PreferNoSchedule, then it try to not to schedule a new pod to that node but previous one will execute in same node
+# it may assign pod to same node , it just try to not to schedule. not  condition , just a try.
 #kubectl taint nodes <node-name> <key>=<value>:PreferNoSchedule
 #EX:::  kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:PreferNoSchedule
 
+#-------------------------------------------------------------------------------------------------------
+#case : 3
+
+# NoExecute
+#================
+# if you use NoExecute, then it don;t assign  new pod to that node and previous one will also exited from that node even it is running from long time
+# no new one will attach and older also vanished
+#kubectl taint nodes <node-name> <key>=<value>:NoExecute
+#EX:::  kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:NoExecute
 
 
 
