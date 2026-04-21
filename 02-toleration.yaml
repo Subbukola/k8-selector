@@ -44,11 +44,11 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mongo-pod
+  name: catalogue-pod
 spec:
   containers:
     - name: mongodb 
-      image: subbukola541/mongodb:1.0
+      image: subbukola541/catalogue:1.0
   tolerations:
     - key: "project"
       operator: "Equal"
