@@ -1,0 +1,15 @@
+#doing this after tainting a node with NoSchedule
+
+#lable a node which u want pod to use that node
+#kubectl label nodes <node-name> <key>=<value>
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: mongodb
+      image: subbukola541/mongodb:1.0
+  # nodeSelector:
+  #   topology.kubernetes.io/zone: us-east-1d  # select node which is in us-east-1d and assign pod to that node
