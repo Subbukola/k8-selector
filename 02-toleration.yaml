@@ -7,7 +7,7 @@
 #========
 #kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:NoExecute // tainted
 
-
+# NOTE: if you forgot to use TOLERATION and if node already tainted , pod will be in Scheduled state. keep this in mind
 apiVersion: v1
 kind: Pod
 metadata:
@@ -25,6 +25,7 @@ spec:
   #   topology.kubernetes.io/zone: us-east-1d
 
 ---
+# NOTE: if you forgot to use TOLERATION and if node already tainted , pod will be in Scheduled state. keep this in mind
 apiVersion: v1
 kind: Pod
 metadata:
@@ -41,6 +42,7 @@ spec:
 
 --- 
 ---
+# NOTE: if you forgot to use TOLERATION and if node already tainted , pod will be in Scheduled state. keep this in mind
 apiVersion: v1
 kind: Pod
 metadata:
