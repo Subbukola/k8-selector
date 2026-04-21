@@ -37,4 +37,20 @@ spec:
     - key: "project"
       operator: "Equal"
       value: "roboshop"
-      effect: "NoExecute"  # it matches node which tainted with "NoExecute" and executes pod inside that node
+      effect: "NoExecute"  #  it matches node which tainted with "NoExecute" and executes pod inside that node
+
+--- 
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+spec:
+  containers:
+    - name: mongodb 
+      image: subbukola541/mongodb:1.0
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "transport"    # kubectl taint nodes ip-192-168-42-86.ec2.internal project=transport:PreferNoSchedule
+      effect: "PreferNoSchedule" #  it matches node which tainted with "PreferNoSchedule" and executes pod inside that node
