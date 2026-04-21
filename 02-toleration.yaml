@@ -1,0 +1,25 @@
+# if we want to schedule pod even node is tainted we have to use TOLERATION concept
+#TOLERATION:  A toleration doesn’t “force” scheduling; it just removes the restriction imposed by the taint.
+# we have to match key values that used for taint. have to use same for pod file in toleration.
+# so that it just removes the restriction imposed by the taint with those key values .
+
+#example
+#========
+#kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:NoExecute // tainted
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+  tolerations:
+    - key: "project"
+      operator: "Equal"
+      value: "roboshop"
+      effect: "NoExecute"  # it matches node which tainted with "NoExecute" and executes pod inside that node
+  # nodeSelector:
+  #   topology.kubernetes.io/zone: us-east-1d

@@ -1,4 +1,5 @@
-#doing this after tainting a node with NoSchedule
+#doing this podexample file after tainting a node with NoSchedule
+# taint is used to reserve node for something. so that others won't use that node
 #lable a node which u want pod to use that node
 #kubectl label nodes <node-name> <key>=<value>
 
@@ -31,8 +32,12 @@
 # no new one will attach and older also vanished
 #kubectl taint nodes <node-name> <key>=<value>:NoExecute
 #EX:::  kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:NoExecute
+# NOTE--> here pod goes to PENDING STATE, because it don;t alow pod to get into node. so pod wont create and run , hence it is in PENDING STATE untill we delete it manually
 
+#-------------------------------------------------------------------------------------------------------
 
+# if we want to schedule pod even node is tainted we have to use TOLERATION concept
+#TOLERATION:  A toleration doesn’t “force” scheduling; it just removes the restriction imposed by the taint.
 
 apiVersion: v1
 kind: Pod
