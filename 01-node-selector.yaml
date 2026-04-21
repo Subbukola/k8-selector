@@ -11,5 +11,5 @@ spec:
   containers:
     - name: mongodb
       image: subbukola541/mongodb:1.0
-  # nodeSelector:
-  #   topology.kubernetes.io/zone: us-east-1d  # select node which is in us-east-1d and assign pod to that node
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1d  # select node which is in us-east-1d and assign pod to that node
