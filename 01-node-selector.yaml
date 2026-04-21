@@ -1,7 +1,28 @@
 #doing this after tainting a node with NoSchedule
-
 #lable a node which u want pod to use that node
 #kubectl label nodes <node-name> <key>=<value>
+
+#case:1
+
+#NoSchedule
+#===========
+# if you use NoSchedule, then u can't able to add new pod to that node but previous one will execute in same node
+#kubectl taint nodes <node-name> <key>=<value>:NoSchedule
+#EX:::  kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:NoSchedule
+
+
+#-------------------------------------------------------------------------------------------------------
+
+#case :2
+
+#PreferNoSchedule
+#================
+# if you use PreferNoSchedule, then it try to not to schedule a new pod to that node but previous one will execute in same node
+#kubectl taint nodes <node-name> <key>=<value>:PreferNoSchedule
+#EX:::  kubectl taint nodes ip-192-168-17-199.ec2.internal project=roboshop:PreferNoSchedule
+
+
+
 
 apiVersion: v1
 kind: Pod
