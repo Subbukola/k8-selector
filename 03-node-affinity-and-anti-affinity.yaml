@@ -1,6 +1,8 @@
 # to label a node 
 #kubectl label nodes <your-node-name> disktype=ssd
 
+# In --> Affinity
+# NotIn --> AntiAffinity
 
 apiVersion: v1
 kind: Pod
@@ -14,7 +16,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In #affinity
             values:
             - us-east-1d
   containers:
@@ -36,7 +38,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In # Affinity
             values:
             - us-east-1e # here in my case 1e zone, no node available
   containers:
@@ -58,7 +60,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In # Affinity
             values:
             - us-east-1c  # zone available
   containers:
@@ -80,7 +82,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: NotIn
+            operator: NotIn # Anti-Affinity
             values:
             - us-east-1f # zone not available
 
@@ -90,7 +92,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In  # Affinity
             values:
             - us-east-1c # zone available
   containers:
@@ -111,7 +113,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: NotIn
+            operator: NotIn # Anti-Affinity
             values:
             - us-east-1f # zone not available
 
@@ -121,7 +123,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In # Affinity
             values:
             - us-east-1g # zone not available
   containers:
@@ -141,7 +143,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: NotIn
+            operator: NotIn # Anti-Affinity
             values:
             - us-east-1d # zone available
 
@@ -151,7 +153,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In  # Affinity
             values:
             - us-east-1g # zone not available
   containers:
@@ -171,7 +173,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In # Affinity
             values:
             - us-east-1d # zone available
 
@@ -181,7 +183,7 @@ spec:
         preference:
           matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: In
+            operator: In # Affinity
             values:
             - us-east-1c # zone available
   containers:
