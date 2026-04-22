@@ -61,7 +61,7 @@ spec:
             topologyKey: "kubernetes.io/hostname"
 
         
-        podAAffinity:
+        podAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
           - labelSelector:
               matchExpressions:
