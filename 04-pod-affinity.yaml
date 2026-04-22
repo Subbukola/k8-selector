@@ -1,3 +1,8 @@
+# Pod Affinity is uded to run pods in same node as our pod already running
+# example if we have two pods  POD-1 and POD-2 and POD-1 is running in node-1
+# if we want POD-2 to run on same node-1 that POD-1 running, use lables of POD-1 and use them in PodAffinity section
+#Like how nodeaffinity have hard and soft rule, same podaffinity also have 
+
 apiVersion: v1
 kind: Pod
 metadata: 
@@ -44,3 +49,30 @@ spec:
     #           - S2
     #       topologyKey: topology.kubernetes.io/zone
   
+--- 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: with-pod-affinity-catalogue
+  labels:
+    project: roboshop
+spec:
+  affinity:
+    podAffinity:
+      podAntiAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: purpose
+              operator: In
+              values:
+              - pod-affinity-practice
+          topologyKey: topology.kubernetes.io/zone
+  
+      
+  containers:
+  - name: catalogue 
+    image: subbukola541/catalogue:1.0
+    
