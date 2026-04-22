@@ -1,17 +1,33 @@
 apiVersion: v1
+kind: pod
+metadata: 
+  name: pod-1
+  labels:
+    type: pod-affinity
+
+spec:
+  containers:
+    - name: ngonx
+      image: nginx 
+
+
+--- 
+apiVersion: v1
 kind: Pod
 metadata:
-  name: mongodb-with-pod-affinity
+  name: with-pod-affinity
+  labels:
+    project: roboshop
 spec:
   affinity:
     podAffinity:
-      preferredDuringSchedulingIgnoredDuringExecution:
+      requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
-          - key: project 
+          - key: type 
             operator: In
             values:
-            - roboshop 
+            - pod-affinity 
         topologyKey: topology.kubernetes.io/zone
   containers:
   - name: mongodb
