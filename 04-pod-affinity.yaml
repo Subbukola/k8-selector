@@ -5,7 +5,7 @@ metadata:
 spec:
   affinity:
     podAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
+      preferredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
           - key: project 
