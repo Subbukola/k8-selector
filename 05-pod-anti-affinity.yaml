@@ -28,6 +28,7 @@ spec:
     podAffinity:
       #HARD
       podAntiAffinity:
+      #SOFT
         preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
           podAffinityTerm:
@@ -54,7 +55,8 @@ spec:
     podAffinity:
       #HARD
       podAntiAffinity:
-        preferredDuringSchedulingIgnoredDuringExecution:
+      #HARD
+        requiredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
           podAffinityTerm:
             labelSelector:
