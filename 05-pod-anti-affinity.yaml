@@ -6,7 +6,7 @@
 apiVersion: v1
 kind: Pod
 metadata: 
-  name: pod-1
+  name: pod-2
   labels:
     purpose: pod-anti-affinity-practice
 
@@ -52,17 +52,15 @@ metadata:
 spec:
   affinity:
     podAntiAffinity:
-      #HARD
-        requiredDuringSchedulingIgnoredDuringExecution:
-        - weight: 100
-          podAffinityTerm:
-            labelSelector:
+          # HARD
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
               matchExpressions:
-                - key: purpose
-                  operator: In
-                  values:
-                    - pod-anti-affinity-practice
-            topologyKey: topology.kubernetes.io/zone
+              - key: purpose
+                operator: In
+                values:
+                - pod-anti-affinity-practice
+            topologyKey: "kubernetes.io/hostname"
       
   containers:
   - name: catalogue
