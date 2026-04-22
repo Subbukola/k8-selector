@@ -25,9 +25,7 @@ metadata:
     project: roboshop
 spec:
   affinity:
-    podAffinity:
-      #HARD
-      podAntiAffinity:
+    podAntiAffinity:
       #SOFT
         preferredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
@@ -39,6 +37,7 @@ spec:
                   values:
                     - pod-anti-affinity-practice
             topologyKey: topology.kubernetes.io/zone
+      
   containers:
   - name: mongodb
     image: subbukola541/mongodb:1.0
@@ -52,9 +51,7 @@ metadata:
     project: roboshop
 spec:
   affinity:
-    podAffinity:
-      #HARD
-      podAntiAffinity:
+    podAntiAffinity:
       #HARD
         requiredDuringSchedulingIgnoredDuringExecution:
         - weight: 100
@@ -66,6 +63,7 @@ spec:
                   values:
                     - pod-anti-affinity-practice
             topologyKey: topology.kubernetes.io/zone
+      
   containers:
   - name: catalogue
     image: subbukola541/catalogue:1.0
