@@ -3,7 +3,7 @@ kind: pod
 metadata: 
   name: pod-1
   labels:
-    type: pod-affinity
+    purpose: pod-affinity-practice
 
 spec:
   containers:
@@ -24,10 +24,10 @@ spec:
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
-          - key: type 
+          - key: purpose 
             operator: In
             values:
-            - pod-affinity 
+            - pod-affinity-practice
         topologyKey: topology.kubernetes.io/zone
   containers:
   - name: mongodb
