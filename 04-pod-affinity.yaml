@@ -60,9 +60,8 @@ metadata:
 spec:
   affinity:
     podAffinity:
-      podAffinity:
-      #SOFT
-      preferredDuringSchedulingIgnoredDuringExecution:
+      #HARD
+      requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
           - key: purpose 
