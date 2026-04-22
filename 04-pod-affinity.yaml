@@ -62,13 +62,16 @@ spec:
     podAffinity:
       #SOFT
       preferredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchExpressions:
-          - key: purpose 
-            operator: In
-            values:
-            - pod-affinity-practice
-        topologyKey: topology.kubernetes.io/zone
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+            - key: purpose
+              operator: In
+              values:
+              - pod-affinity-practice
+          topologyKey: topology.kubernetes.io/zone
+  
   
       
   containers:
