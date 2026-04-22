@@ -9,6 +9,7 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
+    # HARD RULE
       requiredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is in PENDING state
         nodeSelectorTerms:
         - matchExpressions:
@@ -29,6 +30,7 @@ metadata:
 spec:
   affinity:
     nodeAffinity:
+      # SOFT RULE
       preferredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is goes to scheduler and it assigns to another node if any. if no node available and matched node has no resources. then also pod is in PENDING state
       - weight: 10 # it takes priority. if node matches pod creates in matches node. or else looks for another node
         preference:
@@ -58,7 +60,39 @@ spec:
           - key: topology.kubernetes.io/zone
             operator: In
             values:
-            - us-east-1c # here in my case 1e zone, no node available
+            - us-east-1c 
   containers:
   - name: catalogue  
     image: subbukola541/catalogue:1.0
+
+
+--- 
+---
+ 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: cart-pod
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is in PENDING state
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: NotIn
+            values:
+            - us-east-1f
+
+
+      preferredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is goes to scheduler and it assigns to another node if any. if no node available and matched node has no resources. then also pod is in PENDING state
+      - weight: 10 # it takes priority. if node matches pod creates in matches node. or else looks for another node
+        preference:
+          matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1c 
+  containers:
+  - name: cart   
+    image: subbukola541/cart:1.0
