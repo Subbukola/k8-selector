@@ -1,0 +1,21 @@
+# to label a node 
+#kubectl label nodes <your-node-name> disktype=ssd
+
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-ssd
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is in PENDING state
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: Equal
+            values:
+            - us-east-1d
+  containers:
+  - name: nginx
+    image: nginx
