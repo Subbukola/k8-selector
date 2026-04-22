@@ -20,12 +20,13 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: with-pod-affinity
+  name: with-pod-affinity-mongo
   labels:
     project: roboshop
 spec:
   affinity:
     podAffinity:
+      #HARD
       requiredDuringSchedulingIgnoredDuringExecution:
       - labelSelector:
           matchExpressions:
@@ -59,17 +60,16 @@ metadata:
 spec:
   affinity:
     podAffinity:
-      podAntiAffinity:
+      podAffinity:
+      #SOFT
       preferredDuringSchedulingIgnoredDuringExecution:
-      - weight: 100
-        podAffinityTerm:
-          labelSelector:
-            matchExpressions:
-            - key: purpose
-              operator: In
-              values:
-              - pod-affinity-practice
-          topologyKey: topology.kubernetes.io/zone
+      - labelSelector:
+          matchExpressions:
+          - key: purpose 
+            operator: In
+            values:
+            - pod-affinity-practice
+        topologyKey: topology.kubernetes.io/zone
   
       
   containers:
