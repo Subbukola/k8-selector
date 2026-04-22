@@ -13,7 +13,7 @@ spec:
         nodeSelectorTerms:
         - matchExpressions:
           - key: topology.kubernetes.io/zone
-            operator: Equal
+            operator: In
             values:
             - us-east-1d
   containers:
