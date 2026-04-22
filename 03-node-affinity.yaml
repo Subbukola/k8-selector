@@ -19,3 +19,23 @@ spec:
   containers:
   - name: nginx
     image: nginx
+
+---
+ 
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mongo-pod
+spec:
+  affinity:
+    nodeAffinity:
+      preferredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is goes to scheduler and it assigns to another node if any. if no node available and matched node has no resources. then also pod is in PENDING state
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: topology.kubernetes.io/zone
+            operator: In
+            values:
+            - us-east-1e # here in my case 1e zone, no node available
+  containers:
+  - name: mongodb 
+    image: subbukola541/mongodb:1.0
