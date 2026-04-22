@@ -32,7 +32,7 @@ spec:
       preferredDuringSchedulingIgnoredDuringExecution:  # it checks key and value i.e., label. If label matches it schedules pod in that node. or else pod is goes to scheduler and it assigns to another node if any. if no node available and matched node has no resources. then also pod is in PENDING state
       - weight: 10 # it takes priority. if node matches pod creates in matches node. or else looks for another node
         preference:
-        - matchExpressions:
+          matchExpressions:
           - key: topology.kubernetes.io/zone
             operator: In
             values:
